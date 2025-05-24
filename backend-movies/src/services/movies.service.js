@@ -3,6 +3,7 @@ const pool = require(`../config/db`);
 //exporta todas las peliculas
 exports.getAllMovies = async() =>{
 
-const [rows] = await pool.query(`SELECT * FROM movies`);
+const [rows] = await pool.query(`SELECT movies.*, genre_movie.name AS genre_movie FROM movies
+JOIN genre_movie ON movies.genres_id = genre_movie.id`);
 return rows;
 };
