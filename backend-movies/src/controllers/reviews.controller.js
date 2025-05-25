@@ -37,3 +37,28 @@ catch (err){
  res.status(500).json({ error: 'Error al crear reseña' });
 }
 };
+
+//editar (actualizar reseña)
+exports.updateReview = async (req, res) =>{
+
+try{
+const updateReview = await reviewService.update(req.params.id, req.body);
+res.json(reviewUpdated);
+}
+catch(err){
+res.status(500).json({error: `Error al editar reseña`})
+};
+};
+
+//eliminar reseña 
+
+exports.deleteReview = async (req, res) =>{
+
+try{
+const result = await reviewService.remove(req.params.id);
+res.json(result);
+}
+catch (err){
+res.status(500).json({ error: err.message || 'Error al eliminar reseña'})
+};
+};
