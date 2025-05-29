@@ -25,3 +25,10 @@
   font-style: italic;
   font-size: 0.9rem;
 }
+
+.card-movie{
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
