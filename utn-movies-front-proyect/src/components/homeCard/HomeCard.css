@@ -1,34 +1,56 @@
 .movie-card {
-  background-color: #3A6D8C;
-  color: #EAD8B1;
-  border: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: #1e1e1e;
+  color: white;
+  padding: 1rem;
+  transition: transform 0.3s ease;
 }
 
 .movie-card:hover {
-  transform: translateY(-5px);
-  background-color: #6A9AB0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transform: scale(1.05);
 }
 
-.card-title {
-  font-weight: bold;
-  color: #EAD8B1;
-}
-
-.card-text {
-  color: #EAD8B1;
-}
-
-.movie-genre {
-  color: #EAD8B1;
-  font-style: italic;
-  font-size: 0.9rem;
-}
-
-.card-movie{
+.movie-poster {
   width: 100%;
   height: auto;
-  object-fit: cover;
-  border-radius: 8px;
+  border-radius: 6px;
+}
+
+.review-btn {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.review-btn:hover {
+  background-color: #0077aa;
+  cursor: pointer;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+.star {
+  font-size: 20px;
+  color: #444;
+  transition: color 0.3s;
+}
+
+.star:hover,
+.star:hover ~ .star {
+  color: gold;
+
+
+  
 }
