@@ -1,0 +1,9 @@
+.movies-container{
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 2rem;
+justify-items: center;
+padding: 2rem;
+
+
+}

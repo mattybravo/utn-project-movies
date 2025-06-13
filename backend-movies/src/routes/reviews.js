@@ -2,17 +2,18 @@
 const express = require(`express`);
 const router = express.Router();
 const reviewsController = require(`../controllers/reviews.controller`);
+const {auntheticateToken} = require(`../middlewares/auth.middleware`)
 
 router.get(`/`, reviewsController.getReviews);
 
 router.get(`/:id`, reviewsController.getOne);
 
-router.post(`/`, reviewsController.createReview);
+router.post(`/`, auntheticateToken, reviewsController.createReview);
 
 //editar reseña
-router.put(`/:id`, reviewsController.updateReview);
+router.put(`/:id`, auntheticateToken, reviewsController.updateReview);
 
 //eliminar reseña
-router.delete(`/:id`, reviewsController.deleteReview);
+router.delete(`/:id`, auntheticateToken, reviewsController.deleteReview);
 
 module.exports = router;

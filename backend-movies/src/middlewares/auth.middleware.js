@@ -1,4 +1,5 @@
 const jwt = require(`jsonwebtoken`);
+
 //Middleware: Verifica que el token JWT sea válido
 exports.auntheticateToken = (req, res, next) => {
     const authHeader = req.headers[`authorization`];

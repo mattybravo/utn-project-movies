@@ -5,7 +5,7 @@ const [movies, setMovies] = useState([]);
 const [loading, setLoading] = useState(true);
 
 useEffect(()=>{
-fetch("http://localhost:3000/movies")
+fetch("http://localhost:3000/api/movies")
 .then((res) =>res.json())
 .then((data) => { setMovies(data);})
 .catch((error) => console.error("Error al cargar las peliculas:", error))

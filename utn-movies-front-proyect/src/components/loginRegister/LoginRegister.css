@@ -1,0 +1,56 @@
+.login-background {
+  background-color: #121212;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenedor central */
+.login-container {
+  background-color: #1f1f1f;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  max-width: 400px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  border: 2px solid #ffffff22;
+}
+
+/* Botones estilo retro claro */
+.login-btn {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 2px solid #f8f9fa;
+  background-color: transparent;
+  color: #f8f9fa;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #f8f9fa;
+  color: #1f1f1f;
+}
+
+/* Línea decorativa simple */
+.login-wave {
+  margin-top: 2rem;
+  width: 100%;
+  height: 4px;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    #f8f9fa99,
+    transparent
+  );
+  border-radius: 10px;
+}

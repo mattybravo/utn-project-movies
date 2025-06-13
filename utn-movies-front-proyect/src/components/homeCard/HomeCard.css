@@ -1,18 +1,15 @@
 .movie-card {
-  width: 200px;
+  background-color: #2a2f3a; /* un poco más claro que el fondo principal */
+  color: #e8e6e3;
+  border: 1px solid #444857;
   border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  background: #1e1e1e;
-  color: white;
-  padding: 1rem;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .movie-card:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.2);
 }
-
 .movie-poster {
   width: 100%;
   height: auto;
