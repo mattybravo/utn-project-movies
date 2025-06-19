@@ -1,12 +1,17 @@
-export function MovieDetail(){
+import { useState } from "react";
 
-return(
-<>
-<div>
-<h2></h2>
-<img src="" alt="" />
-<p>Detalle...</p>
-</div>
-</>
-)
+export function MovieDetail(){
+    const [comentario, setComentario] = useState(``);
+    const [rating, setRating] = useState(0);
+
+    const eventSubmite = async (e) =>{
+        e.preventDefault();
+    }   
+
+
+
+
+
+
+
 }
