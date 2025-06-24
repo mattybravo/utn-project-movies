@@ -1,5 +1,5 @@
 .movie-card {
-  background-color: #2a2f3a; /* un poco más claro que el fondo principal */
+  background-color: #31363F; /* un poco más claro que el fondo principal */
   color: #e8e6e3;
   border: 1px solid #444857;
   border-radius: 10px;
@@ -8,7 +8,7 @@
 
 .movie-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.2);
+  box-shadow: 0 4px 20px #3A404A;
 }
 .movie-poster {
   width: 100%;
@@ -20,15 +20,15 @@
   margin-top: 0.5rem;
   padding: 0.5rem;
   width: 100%;
-  background-color: #00aaff;
-  color: white;
+  background-color: #444857;
+  color: #EEEEEE;
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s;
 }
 
 .review-btn:hover {
-  background-color: #0077aa;
+  background-color:#e0e0e0d9;
   cursor: pointer;
 }
 

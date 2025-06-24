@@ -12,7 +12,7 @@ export default function Home() {
         <>
             <Navbar />
             <div className="container text-center">
-                <h1 className="my-4 text-primary">Deje su reseña aqui.</h1>
+                <h1 className="my-4 text-white">Deje su reseña aqui.</h1>
                 <div className="movies-container">
                     {movies.slice(0, 10).map((movie) => {
                         console.log(movie);
