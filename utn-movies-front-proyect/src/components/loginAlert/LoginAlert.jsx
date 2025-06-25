@@ -1,6 +1,6 @@
 import "./LoginAlert.css"
 export default function LoginAlert({show, onClose, onLogin}) {
-    
+  
     if (!show) return null;
     return(
       <>

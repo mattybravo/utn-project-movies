@@ -19,10 +19,20 @@ export default function Home() {
         if(!token) {
             setSelectedMovieId(movieId);
             setShowAlert(true)
+            navigate(`/login?redirect=/movieDetail/${movieId}`); 
         }else{
-            navigate(`/movieDetail:id${movieId}`)
+            navigate(`/movieDetail/${movieId}`);
         }
     };
+
+{showAlert && (
+  <div className="alertButton">
+    <p>¡Debes iniciar sesión para ver la película!</p>
+    <button onClick={() => navigate(`/login?redirect=/movieDetail/${selectedMovieId}`)}>
+      Ir a iniciar sesión
+    </button>
+  </div>
+)}
 
     const goToLogin = () => {
     navigate(`/login?redirect=/movieDetail/${selectedMovieId}`);
@@ -36,7 +46,7 @@ export default function Home() {
                 <div className="movies-container">
                     {movies.slice(0, 10).map((movie) => {
                         console.log(movie);
-                        return <HomeCard key={movie.id} image={movie.imagen} id={movie.id} title={movie.titulo} onReviewClick={(handleReviewClick) =>(movie.id)}/>
+                        return <HomeCard key={movie.id} image={movie.imagen} id={movie.id} title={movie.titulo} onReviewClick={handleReviewClick}/>
                     })}
                 </div>
             </div>

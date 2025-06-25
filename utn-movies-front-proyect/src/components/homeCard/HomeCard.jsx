@@ -11,7 +11,7 @@ export default function HomeCard({ image, title, onReviewClick }) {
                         <span className="star" key={i}>★</span>
                     ))}
                 </div>
-                <button className="review-btn" onClick={onReviewClick}>Hacer Reseña</button>
+                <button className="review-btn" onClick={ () => onReviewClick(movie.id)}>Hacer Reseña</button>
             </div>
         </>
     )
