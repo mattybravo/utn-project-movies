@@ -11,7 +11,8 @@ useEffect(() =>{
             const token = localStorage.getItem("token")
 
             if (!token) {
-            return <p>Debes iniciar sesión para realizar una reseña.</p>
+            setLoading(false);
+            return;
             }
             const response = await axios.get(`http://localhost:3000/api/reviews/movie${movieId}`,{
                   headers: {Authorization: `Bearer ${token}`,}

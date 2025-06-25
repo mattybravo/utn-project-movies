@@ -1,7 +1,7 @@
 import UseReview from "../../hooks/UseReview";
 import { useState } from "react";
 
-export function MovieDetail({movie}){
+export default function MovieDetail({movie}){
 const [reviews, loading] = UseReview(movie.id);
 const [comment, setComment] = useState("");
 const [rating, setRating] = useState(0);
