@@ -6,6 +6,9 @@ const {auntheticateToken} = require(`../middlewares/auth.middleware`)
 
 router.get(`/`, reviewsController.getReviews);
 
+router.get("/movie/:movieId", reviewsController.getReviewsByMovieId);
+
+
 router.get(`/:id`, reviewsController.getOne);
 
 router.post(`/`, auntheticateToken, reviewsController.createReview);

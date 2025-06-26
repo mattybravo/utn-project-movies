@@ -1,4 +1,6 @@
 //Imports
+const dotenv = require(`dotenv`)
+dotenv.config();
 const express = require('express'); //express
 const cors = require(`cors`)
 //Routes
@@ -15,7 +17,7 @@ const PORT = process.env.PORT || 3000; // Puerto donde escuchará el servidor
 //usar Rutas
 app.use(`/api/movies`, moviesRouter);
 app.use(`/api/reviews`, reviewsRouter);
-app.use(`/api`, authRouter)
+app.use(`/api/auth`, authRouter)
 //iniciar servidor
   app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);

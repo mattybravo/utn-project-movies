@@ -1,5 +1,5 @@
 import "./HomeCard.css"
-export default function HomeCard({ image, title, onReviewClick }) {
+export default function HomeCard({ image, title, id, onReviewClick }) {
 
     return (
         <>
@@ -11,7 +11,7 @@ export default function HomeCard({ image, title, onReviewClick }) {
                         <span className="star" key={i}>★</span>
                     ))}
                 </div>
-                <button className="review-btn" onClick={ () => onReviewClick(movie.id)}>Hacer Reseña</button>
+                <button className="review-btn" onClick={ () => {console.log(`Boton clickeando, movie Id`, id); onReviewClick(id) }}>Hacer Reseña</button>
             </div>
         </>
     )

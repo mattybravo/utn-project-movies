@@ -24,6 +24,21 @@ exports.getOne = async (req, res) =>{
     }
 };
 
+
+exports.getReviewsByMovieId = async (req, res) => {
+  const { movieId } = req.params;
+
+  try {
+    const reviews = await Review.find({ movieId });
+
+    res.status(200).json(reviews);
+  } catch (err) {
+    console.error("Error al obtener las reseñas por película:", err);
+    res.status(500).json({ message: "Error al obtener reseñas" });
+  }
+};
+
+
 //crear reseña
 exports.createReview = async (req, res) =>{
     try{

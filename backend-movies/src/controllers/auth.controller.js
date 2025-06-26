@@ -29,7 +29,7 @@ exports.register = async (req, res) => {
         //insertar nuevo usuario
         const [userResult] = await pool.query(
             `INSERT INTO users(username, email, password) VALUES(?,?,?)`,
-            [username, password, hashedPassword]
+            [username, email, hashedPassword]
         );
         res.status(201).json({ message: `Usuario registrado`, userId: userResult.insertId });
     }
@@ -52,14 +52,14 @@ exports.login = async (req, res) => {
         //ejecutar un query/consulta para traernos los users + roles con un JOIN
         const [rows] = pool.query(
             `SELECT users.id, users.username, users.password, roles.name AS role FROM users
-             LEFT JOIN user_roles ur ON users.id = user_roles.user_id LEFT JOIN roles ON user_roles.role_id = role.id WHERE username.email =?`, [email])
+             LEFT JOIN user_roles ur ON users.id = user_roles.user_id LEFT JOIN roles ON user_roles.role_id = role.id WHERE users.email =?`, [email])
 
-        if (length === 0) {
+        if (rows.length === 0) {
             return res.status(401).json({ error: `Credenciales inválidas` });
 
         }
         //extraigo los datos del usuario 
-        const { id, email, password: hashedPassword } = rows[0]; //<= se extrae la contraseña y lo guarda en una password ya hasheada
+        const { id, username, email, password: hashedPassword } = rows[0]; //<= se extrae la contraseña y lo guarda en una password ya hasheada
 
 
         //verifico si la contraseña deja de ser plana y fue hasheada con la función compare de brcypt
@@ -68,23 +68,19 @@ exports.login = async (req, res) => {
             return res.status(401).json({ error: `Credenciales inválidas` })
         }
 
-        const roles = rows.map((row) => row.role).filter(Boolean);
-
         //genera el token JWT
         const token = jwt.sign(
 
-            { id, username, password },//payload dentro del token que se codifica
+            { id, username},//payload dentro del token que se codifica
             process.env.JWT_SECRET,
             { expiresIn: process.env.JWT_EXPIRES_IN || `1d` }
         );
 
         //devolver el token al Frontend
         res.status(200).json({ message: `Login exitoso!`, token })
-
     }
-
-    catch {
-        console.error('Error en login:', err);
+    catch (err) {
+    console.error('Error en login:', err);
         res.status(500).json({ message: 'Error del servidor.' });
     }
 
