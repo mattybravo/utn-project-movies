@@ -59,13 +59,14 @@ exports.remove = async (id)=>{
 
 };
 
- exports.getReviewsByMovieIdService = async (movieId) => {
-  
-  const [rows] = await connection.query(
-      "SELECT * FROM reviews WHERE movie_id = ?",
-  [movieId]
+exports.getByMovieId = async (movieId) => {
+  const [rows] = await pool.query(
+    `SELECT r.id, r.comentario_reviews AS comment, r.rating, u.username AS userName
+     FROM reviews r
+     JOIN users u ON r.user_id = u.id
+     WHERE r.movie_id = ?`,
+    [movieId]
   );
-
   return rows;
 };
 

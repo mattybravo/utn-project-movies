@@ -15,7 +15,7 @@ export default function Home() {
   const handleReviewClick = (movieId) => {
     const token = localStorage.getItem("token");
 
-    if (!token) {
+    if (!token || token === "undefined" || token === "123456") {
     console.log("🔐 No hay token. Mostrando alerta...");
     setSelectedMovieId(movieId);
     setShowAlert(true);

@@ -24,20 +24,17 @@ exports.getOne = async (req, res) =>{
     }
 };
 
-
-exports.getReviewsByMovieId = async (req, res) => {
-  const { movieId } = req.params;
+exports.getByMovieId = async (req, res) => {
+  const movieId = req.params.movieId;
 
   try {
-    const reviews = await Review.find({ movieId });
-
-    res.status(200).json(reviews);
+    const reviews = await reviewService.getByMovieId(movieId);
+    res.json(reviews);
   } catch (err) {
-    console.error("Error al obtener las reseñas por película:", err);
-    res.status(500).json({ message: "Error al obtener reseñas" });
+    console.error("Error al obtener reseñas:", err);
+    res.status(500).json({ error: "Error al obtener reseñas" });
   }
 };
-
 
 //crear reseña
 exports.createReview = async (req, res) =>{

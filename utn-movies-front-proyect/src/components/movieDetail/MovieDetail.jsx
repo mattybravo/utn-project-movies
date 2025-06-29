@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import UseReview from "../../hooks/UseReview";
 import axios from "axios";
-
+import "./MovieDetail.css"
 export default function MovieDetail() {
   const { id } = useParams();              // ID que llega de la URL
   const [movie, setMovie] = useState(null);
