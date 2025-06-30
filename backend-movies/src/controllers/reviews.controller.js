@@ -36,59 +36,59 @@ exports.getByMovieId = async (req, res) => {
   }
 };
 
-//crear reseña
-exports.createReview = async (req, res) =>{
-    try{
-       const user = req.user.id;
-        const newReview = await reviewService.create(req.body, user);
-        res.status(201).json(newReview);
-    }
-    catch (err){
-        res.status(500).json({ error: 'Error al crear reseña' });
-    }
+// Crear reseña
+exports.createReview = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const newReview = await reviewService.create(req.body, userId);
+    res.status(201).json(newReview);
+  } catch (err) {
+    res.status(500).json({ error: 'Error al crear reseña' });
+  }
 };
 
-//editar (actualizar reseña)
-exports.updateReview = async (req, res) =>{
-    try{
-     const reviewId = req.params.id;
-      const user = req.user.id;    
-       const review = await reviewService.getById(reviewId);
+// Editar reseña
+exports.updateReview = async (req, res) => {
+  try {
+    const reviewId = req.params.id;
+    const userId = req.user.id;
 
-        if (!review){
-            res.status(404).json({message: `Reseña no encontrada.`})
-        }
-        if (reviewId !== user) {
-        res.status(403).json({message: `No tienes permitido editar la reseña.`})
-        }
+    const review = await reviewService.getById(reviewId);
 
-    const updateReview = await reviewService.update(req.params.id, req.body);
-        res.json(reviewUpdated);
+    if (!review) {
+      return res.status(404).json({ message: 'Reseña no encontrada.' });
     }
-    catch(err){
-         res.status(500).json({error: `Error al editar reseña`})
-    };
+
+    if (review.user_id !== userId) {
+      return res.status(403).json({ message: 'No tienes permitido editar esta reseña.' });
+    }
+
+    const updatedReview = await reviewService.update(reviewId, req.body);
+    res.json(updatedReview);
+  } catch (err) {
+    res.status(500).json({ error: 'Error al editar reseña' });
+  }
 };
 
-//eliminar reseña 
+// Eliminar reseña
+exports.deleteReview = async (req, res) => {
+  try {
+    const reviewId = req.params.id;
+    const userId = req.user.id;
 
-exports.deleteReview = async (req, res) =>{
-    try{
-      const reviewId = req.params.id;
-       const user = req.user.id;
-        const review = await reviewService.getById(reviewId);
+    const review = await reviewService.getById(reviewId);
 
-        if (!review) {
-            res.status(404).json({message: `Reseña no encontrada.`})
-        }
-        if (reviewId !== user){
-            res.status(403).json({message: `No tienes permitido eliminar la reseña.`})
-        }
+    if (!review) {
+      return res.status(404).json({ message: 'Reseña no encontrada.' });
+    }
 
-        const result = await reviewService.remove(req.params.id);
-        res.json(result);
+    if (review.user_id !== userId) {
+      return res.status(403).json({ message: 'No tienes permitido eliminar esta reseña.' });
+    }
 
-    }catch (err){
-        res.status(500).json({ error: err.message || 'Error al eliminar reseña.'})
-    };
+    await reviewService.remove(reviewId);
+    res.json({ message: 'Reseña eliminada correctamente' });
+  } catch (err) {
+    res.status(500).json({ error: 'Error al eliminar reseña.' });
+  }
 };

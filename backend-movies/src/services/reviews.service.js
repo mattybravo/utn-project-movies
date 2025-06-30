@@ -17,51 +17,60 @@ exports.getById = async (id)=>{
 
 };
 
-exports.create = async (reviewData, user) =>{
-
-  const {movie_id, comentario_reviews, rating} = reviewData;
+// Crear reseña
+exports.create = async (reviewData, userId) => {
+  const { movie_id, comentario_reviews, rating } = reviewData;
 
   const [result] = await pool.query(
-    `INSERT INTO reviews(movie_id, user_id, comentario_reviews, rating) VALUES(?, ?, ?, ?)`,
-    [user, movie_id, comentario_reviews, rating]
+    `INSERT INTO reviews (movie_id, user_id, comentario_reviews, rating)
+     VALUES (?, ?, ?, ?)`,
+    [movie_id, userId, comentario_reviews, rating]
   );
-  return {id:result.insertId, movie_id, user_id:user, comentario_reviews, rating}
-  
-}
 
-
-//service para editar las reseñas
-exports.update = async (id, {comentario_reviews, rating, user_id})=>{
-
-  const [rows] = await pool.query(
-    `UPDATE reviews
-  SET comentario_reviews =?, rating = ?, user_id = ?
-  WHERE id = ?`,
-  [comentario_reviews, rating, user_id]
-  );
-  return rows;
-
+  return {
+    id: result.insertId,
+    movie_id,
+    user_id: userId,
+    comentario_reviews,
+    rating,
+  };
 };
 
-//service para eliminar reseñas
+// Obtener una reseña por ID
+exports.getById = async (id) => {
+  const [rows] = await pool.query(`SELECT * FROM reviews WHERE id = ?`, [id]);
+  return rows[0]; // Devuelve solo una reseña
+};
 
-exports.remove = async (id)=>{
-
+// Editar reseña
+exports.update = async (id, { comentario_reviews, rating }) => {
   const [result] = await pool.query(
-    `DELETE from reviews WHERE ID = ?`[id]);
+    `UPDATE reviews SET comentario_reviews = ?, rating = ? WHERE id = ?`,
+    [comentario_reviews, rating, id]
+  );
 
   if (result.affectedRows === 0) {
-    // No se encontró una reseña con ese ID
-    throw new Error('Reseña no encontrada');
+    throw new Error("Reseña no encontrada");
   }
 
-  return { message: 'Reseña eliminada correctamente' };
-
+  return { id, comentario_reviews, rating };
 };
+
+// Eliminar reseña
+exports.remove = async (id) => {
+  const [result] = await pool.query(`DELETE FROM reviews WHERE id = ?`, [id]);
+
+  if (result.affectedRows === 0) {
+    throw new Error("Reseña no encontrada");
+  }
+
+  return { message: "Reseña eliminada correctamente" };
+};
+
 
 exports.getByMovieId = async (movieId) => {
   const [rows] = await pool.query(
-    `SELECT r.id, r.comentario_reviews AS comment, r.rating, u.username AS userName
+    `SELECT r.id, r.comentario_reviews, r.rating, r.user_id, u.username AS userName
      FROM reviews r
      JOIN users u ON r.user_id = u.id
      WHERE r.movie_id = ?`,
@@ -69,4 +78,5 @@ exports.getByMovieId = async (movieId) => {
   );
   return rows;
 };
+
 

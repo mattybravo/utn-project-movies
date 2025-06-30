@@ -1,35 +1,42 @@
-import "../navbar/Navbar.css"
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
 export default function Navbar() {
+  const [userName, setUserName] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decoded = JSON.parse(atob(token.split(".")[1]));
+      setUserName(decoded.username);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setUserName(null);
+    navigate("/");
+  };
 
   return (
+    <nav className="navbar-custom px-4 d-flex justify-content-between align-items-center">
+      <Link className="navbar-brand-custom" to="/">MovieReviews</Link>
 
-    <nav className="navbar navbar-expand-lg">
-      <div className="container-fluid">
-        <a className="navbar-brand fs-4" href="#">Movies Project</a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#Navbar"
-          aria-controls="#Navbar"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="Navbar">
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item"><Link to="/" className="nav-link">Movies</Link> </li>
-            <li className="nav-item"><Link to="/loginRegister" className="nav-link">Create Account</Link> </li>
-            <li className="nav-item"><Link to="/loginRegister" className="nav-link">Login</Link> </li>
-          </ul>
-        </div>
+      <div className="d-flex align-items-center">
+        {userName ? (
+          <>
+            <span className="navbar-text-custom mr-3">Hola, {userName}</span>
+            <button className="btn-custom" onClick={handleLogout}>Cerrar sesión</button>
+          </>
+        ) : (
+          <>
+            <Link to="/loginRegister" className="btn-custom mr-2">Iniciar sesión</Link>
+            <Link to="/loginRegister" className="btn-custom">Crear cuenta</Link>
+          </>
+        )}
       </div>
     </nav>
-
-  )
-
-
+  );
 }
