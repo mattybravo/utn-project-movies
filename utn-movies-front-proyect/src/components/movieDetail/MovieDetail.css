@@ -20,6 +20,17 @@
   text-align: center;
 }
 
+.movie-poster {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+
+
 .movie-info img.movie-poster {
   width: 100%;
   max-width: 300px;
