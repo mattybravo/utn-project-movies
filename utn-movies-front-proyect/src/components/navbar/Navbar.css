@@ -1,5 +1,5 @@
 .navbar-custom {
-  background-color: #1c1c1c42;
+  background-color: #1c1c1c57;
   padding: 1rem;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .btn-custom:hover {
-  background-color: #383bff18;
+  background-color: #383bff15;
   color: white;
   border-color: #fdfeffa8;
 }

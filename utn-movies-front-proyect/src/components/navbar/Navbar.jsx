@@ -24,7 +24,7 @@ export default function Navbar() {
     <nav className="navbar-custom px-4 d-flex justify-content-between align-items-center">
       <Link className="navbar-brand-custom" to="/">MovieReviews</Link>
 
-      <div className="d-flex align-items-center">
+      <div className="d-flex align-items-center d-grid gap-2">
         {userName ? (
           <>
             <span className="navbar-text-custom mr-3">Hola, {userName}</span>
